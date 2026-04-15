@@ -1,3 +1,5 @@
+// ─── Internal app types ───────────────────────────────────────────────────────
+
 export interface CommitteeReport {
   id: number;
   title: string;
@@ -39,25 +41,48 @@ export interface OverallStats {
 
 export type BadgeStatus = "overdue" | "pending" | "responded";
 
-// Raw API shapes from committees.api.parliament.uk
-export interface ApiReport {
+// ─── Raw API shapes from committees-api.parliament.uk ─────────────────────────
+
+export interface ApiPublicationSummary {
   id: number;
-  title: string;
-  reportPublishedDate: string;
-  governmentResponseDate: string | null;
-  committee?: {
-    id: number;
-    name: string;
-    parentDepartment?: { name: string };
-    currentChair?: { name: string } | null;
-  };
-  reportPublicationUrl?: string;
-  governmentResponsePublicationUrl?: string | null;
+  publicationStartDate: string | null;
+  additionalContentUrl: string | null;
 }
 
-export interface ApiCommittee {
+export interface ApiGovernmentResponse {
+  publication: ApiPublicationSummary[] | null;
+  responseDeadline: string | null;
+  responseExcepted: boolean;
+}
+
+export interface ApiScrutinisingDepartment {
   id: number;
   name: string;
-  parentDepartment?: { name: string };
-  currentChair?: { name: string } | null;
+}
+
+export interface ApiCommitteeSummary {
+  id: number;
+  name: string | null;
+  scrutinisingDepartments: ApiScrutinisingDepartment[] | null;
+  house?: { value: string; name: string } | null;
+}
+
+export interface ApiPublication {
+  id: number;
+  description: string | null;
+  publicationStartDate: string | null;
+  governmentResponses: ApiGovernmentResponse | null;
+  additionalContentUrl: string | null;
+  additionalContentUrl2: string | null;
+  committee: ApiCommitteeSummary | null;
+}
+
+export interface ApiCommitteeDetails extends ApiCommitteeSummary {
+  purpose: string | null;
+}
+
+export interface ApiCollection<T> {
+  items: T[] | null;
+  totalResults: number;
+  itemsPerPage: number;
 }

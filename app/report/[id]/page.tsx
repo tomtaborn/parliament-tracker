@@ -164,7 +164,7 @@ export default async function ReportPage({ params }: PageProps) {
         {/* Context strip */}
         <div className="mt-6 border border-[#E5E3DC] rounded-sm p-5 bg-white">
           <p className="text-[13px] text-[#6B6B67]">
-            <span className="font-500 text-[#1A1A18]">
+            <span className="font-medium text-[#1A1A18]">
               {report.committeeName}
             </span>{" "}
             is a House of Commons select committee responsible for scrutinising{" "}
@@ -183,7 +183,7 @@ export default async function ReportPage({ params }: PageProps) {
             href={tweetUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-4 py-2 border border-[#E5E3DC] rounded-sm text-[13px] font-500 text-[#1A1A18] bg-white hover:border-[#1A1A18] transition-colors"
+            className="inline-flex items-center gap-1.5 px-4 py-2 border border-[#E5E3DC] rounded-sm text-[13px] font-medium text-[#1A1A18] bg-white hover:border-[#1A1A18] transition-colors"
           >
             Post to X / Twitter ↗
           </a>

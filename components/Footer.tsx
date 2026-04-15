@@ -20,7 +20,7 @@ export default function Footer() {
           </div>
           <div className="flex items-center gap-4 text-[13px] text-[#6B6B67]">
             <a
-              href="https://github.com"
+              href="https://github.com/tomtaborn/parliament-tracker"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[#1A1A18] transition-colors"

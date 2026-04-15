@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import StatsBar from "@/components/StatsBar";
@@ -22,10 +23,26 @@ function formatTimestamp() {
   });
 }
 
-export default async function TrackerPage() {
+function LoadingSkeleton() {
+  return (
+    <div className="animate-pulse space-y-4">
+      <div className="flex gap-3">
+        {[0, 1, 2].map((i) => (
+          <div key={i} className="flex-1 h-24 bg-[#E5E3DC] rounded-sm" />
+        ))}
+      </div>
+      <div className="grid gap-4 mt-6" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))" }}>
+        {[0, 1, 2, 3, 4, 5].map((i) => (
+          <div key={i} className="h-36 bg-[#E5E3DC] rounded-sm" />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+async function TrackerData() {
   let summaries;
   let stats;
-  let error = false;
 
   try {
     [summaries, stats] = await Promise.all([
@@ -33,23 +50,30 @@ export default async function TrackerPage() {
       getOverallStats(),
     ]);
   } catch {
-    error = true;
-    summaries = [];
-    stats = {
-      totalOverdue: 0,
-      totalPending: 0,
-      respondedLast30Days: 0,
-      mostOverdueDepartment: "—",
-      longestOutstandingDays: 0,
-    };
+    return (
+      <div className="border border-[#E5E3DC] rounded-sm p-6 text-[15px] text-[#6B6B67]">
+        Data temporarily unavailable. Please try again shortly.
+      </div>
+    );
   }
 
+  return (
+    <>
+      <div className="mb-8">
+        <StatsBar stats={stats} />
+      </div>
+      <TrackerFilters summaries={summaries} />
+    </>
+  );
+}
+
+export default function TrackerPage() {
   return (
     <div className="flex flex-col flex-1">
       <Nav />
 
       <main className="flex-1 max-w-5xl mx-auto w-full px-4 sm:px-6 py-10">
-        {/* Page header */}
+        {/* Page header — renders immediately */}
         <div className="mb-8">
           <h1 className="text-[32px] font-semibold text-[#1A1A18] leading-tight">
             Select Committee Response Tracker
@@ -63,26 +87,15 @@ export default async function TrackerPage() {
           </p>
         </div>
 
-        {error ? (
-          <div className="border border-[#E5E3DC] rounded-sm p-6 text-[15px] text-[#6B6B67]">
-            Data temporarily unavailable. Please try again shortly.
-          </div>
-        ) : (
-          <>
-            {/* Stats bar */}
-            <div className="mb-8">
-              <StatsBar stats={stats} />
-            </div>
+        {/* Data streams in once API calls complete */}
+        <Suspense fallback={<LoadingSkeleton />}>
+          <TrackerData />
+        </Suspense>
 
-            {/* Filtered department grid */}
-            <TrackerFilters summaries={summaries} />
-          </>
-        )}
-
-        {/* Methodology note */}
+        {/* Methodology note — renders immediately */}
         <div className="mt-12 pt-6 border-t border-[#E5E3DC]">
           <p className="text-[13px] text-[#6B6B67] max-w-2xl leading-relaxed">
-            <strong className="font-500 text-[#1A1A18]">Methodology:</strong>{" "}
+            <strong className="font-medium text-[#1A1A18]">Methodology:</strong>{" "}
             Responses are considered overdue after 60 calendar days from report
             publication date, in line with parliamentary convention.
             Parliament&apos;s 60-day convention is sometimes interpreted as working

@@ -72,7 +72,7 @@ export default async function CommitteePage({ params }: PageProps) {
           {/* Summary counts */}
           <div className="mt-4 flex flex-wrap gap-4 text-[13px]">
             {committee.overdueReports.length > 0 && (
-              <span className="text-[#C41E3A] font-500">
+              <span className="text-[#C41E3A] font-medium">
                 {committee.overdueReports.length} overdue
               </span>
             )}

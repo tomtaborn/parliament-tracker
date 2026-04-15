@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
@@ -9,6 +9,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://parliamenttracker.uk"),
   title: "Parliament Tracker — Select Committee Accountability",
   description:
     "Track how long the UK government has been ignoring select committee reports. Government departments ranked by overdue parliamentary responses.",
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
       "Government departments ranked by overdue parliamentary responses.",
     url: "https://parliamenttracker.uk",
     siteName: "Parliament Tracker",
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     locale: "en_GB",
     type: "website",
   },
@@ -27,9 +28,12 @@ export const metadata: Metadata = {
     title: "Parliament Tracker — Select Committee Accountability",
     description:
       "Government departments ranked by overdue parliamentary responses.",
-    images: ["/og-image.png"],
+    images: ["/opengraph-image"],
   },
   manifest: "/manifest.json",
+};
+
+export const viewport: Viewport = {
   themeColor: "#C41E3A",
 };
 

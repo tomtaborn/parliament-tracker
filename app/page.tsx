@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -71,7 +72,7 @@ export default function HomePage() {
           <div className="mt-8">
             <Link
               href="/tracker"
-              className="inline-flex items-center gap-2 bg-[#C41E3A] text-white px-6 py-3 text-[15px] font-500 rounded-sm hover:bg-[#a81930] transition-colors"
+              className="inline-flex items-center gap-2 bg-[#C41E3A] text-white px-6 py-3 text-[15px] font-medium rounded-sm hover:bg-[#a81930] transition-colors"
             >
               See who&apos;s overdue →
             </Link>
@@ -82,8 +83,23 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Live stats strip */}
-      <LiveStats />
+      {/* Live stats strip — streams in independently */}
+      <Suspense
+        fallback={
+          <div className="bg-[#1A1A18] py-10 px-6">
+            <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 animate-pulse">
+              {[0, 1, 2].map((i) => (
+                <div key={i}>
+                  <div className="h-12 w-24 bg-[#333330] rounded mb-2" />
+                  <div className="h-3 w-40 bg-[#333330] rounded" />
+                </div>
+              ))}
+            </div>
+          </div>
+        }
+      >
+        <LiveStats />
+      </Suspense>
 
       {/* Explainer */}
       <section className="bg-[#FAFAF8] py-16 px-4 sm:px-6">
@@ -134,7 +150,7 @@ export default function HomePage() {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="border border-[#E5E3DC] rounded-sm p-4">
-              <p className="text-[15px] font-500 text-[#1A1A18]">
+              <p className="text-[15px] font-medium text-[#1A1A18]">
                 Consistency checker
               </p>
               <p className="mt-1 text-[13px] text-[#6B6B67]">
@@ -143,7 +159,7 @@ export default function HomePage() {
               </p>
             </div>
             <div className="border border-[#E5E3DC] rounded-sm p-4">
-              <p className="text-[15px] font-500 text-[#1A1A18]">
+              <p className="text-[15px] font-medium text-[#1A1A18]">
                 Speech reader
               </p>
               <p className="mt-1 text-[13px] text-[#6B6B67]">
