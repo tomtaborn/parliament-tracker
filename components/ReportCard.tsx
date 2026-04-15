@@ -43,7 +43,7 @@ export default function ReportCard({ report }: ReportCardProps) {
             href={report.reportUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[15px] font-500 text-[#1A1A18] hover:text-[#C41E3A] transition-colors leading-snug block"
+            className="text-[15px] font-medium text-[#1A1A18] hover:text-[#C41E3A] transition-colors leading-snug block"
           >
             {report.title}
           </a>

@@ -15,7 +15,7 @@ export default function TrackerFilters({ summaries }: TrackerFiltersProps) {
 
   const filtered = summaries.filter((d) => {
     if (filter === "overdue") return d.overdueCount > 0;
-    if (filter === "responded") return d.respondedCount > 0 && d.overdueCount === 0;
+    if (filter === "responded") return d.respondedCount > 0;
     return true;
   });
 
@@ -34,7 +34,7 @@ export default function TrackerFilters({ summaries }: TrackerFiltersProps) {
             key={p.value}
             onClick={() => setFilter(p.value)}
             className={[
-              "px-3.5 py-1.5 rounded-full text-[13px] font-500 border transition-colors",
+              "px-3.5 py-1.5 rounded-full text-[13px] font-medium border transition-colors",
               filter === p.value
                 ? "bg-[#1A1A18] text-white border-[#1A1A18]"
                 : "bg-white text-[#1A1A18] border-[#E5E3DC] hover:border-[#1A1A18]",

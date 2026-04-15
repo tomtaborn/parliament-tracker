@@ -28,7 +28,7 @@ export default function CommitteeList({ committees }: CommitteeListProps) {
             className="flex items-center justify-between py-4 gap-4 hover:bg-[#FAFAF8] px-2 -mx-2 rounded-sm transition-colors group"
           >
             <div className="flex-1 min-w-0">
-              <p className="text-[15px] font-500 text-[#1A1A18] group-hover:text-[#C41E3A] transition-colors truncate">
+              <p className="text-[15px] font-medium text-[#1A1A18] group-hover:text-[#C41E3A] transition-colors truncate">
                 {committee.name}
               </p>
               {longestDays !== null && (
@@ -39,7 +39,7 @@ export default function CommitteeList({ committees }: CommitteeListProps) {
             </div>
             <div className="flex items-center gap-3 shrink-0">
               {committee.overdueReports.length > 0 && (
-                <span className="text-[13px] font-500 text-[#C41E3A]">
+                <span className="text-[13px] font-medium text-[#C41E3A]">
                   {committee.overdueReports.length} overdue
                 </span>
               )}

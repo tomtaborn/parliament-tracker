@@ -15,7 +15,7 @@ export default function Nav() {
         <nav className="flex items-center gap-6">
           <Link
             href="/tracker"
-            className="text-[13px] font-500 text-[#1A1A18] hover:text-[#C41E3A] transition-colors"
+            className="text-[13px] font-medium text-[#1A1A18] hover:text-[#C41E3A] transition-colors"
           >
             Tracker →
           </Link>

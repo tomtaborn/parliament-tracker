@@ -8,7 +8,7 @@ interface OverdueBadgeProps {
 export default function OverdueBadge({ status, days }: OverdueBadgeProps) {
   if (status === "overdue") {
     return (
-      <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-500 bg-[#FDF0F2] text-[#C41E3A]">
+      <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-[#FDF0F2] text-[#C41E3A]">
         {days} {days === 1 ? "day" : "days"} overdue
       </span>
     );
@@ -16,7 +16,7 @@ export default function OverdueBadge({ status, days }: OverdueBadgeProps) {
 
   if (status === "pending") {
     return (
-      <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-500 bg-[#FEF3C7] text-[#B45309]">
+      <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-[#FEF3C7] text-[#B45309]">
         due in {Math.abs(days)} {Math.abs(days) === 1 ? "day" : "days"}
       </span>
     );
@@ -24,7 +24,7 @@ export default function OverdueBadge({ status, days }: OverdueBadgeProps) {
 
   // responded
   return (
-    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-500 bg-[#EDF7F2] text-[#2D6A4F]">
+    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-[#EDF7F2] text-[#2D6A4F]">
       responded
     </span>
   );
